@@ -4,7 +4,7 @@ import { getAllAutos, createAuto, deleteAuto } from "./autos.controllers.js";
 const router = Router();
 
 //Asi se crea pero tambien como abajo 
-//router.get('/autos', getAllAutos);
+router.get('/autos', getAllAutos);
 
 // Construir un endpoint para agregar un auto a la base de datos.
 // La información que se debe enviar es la siguiente:
@@ -15,7 +15,7 @@ router.route('/autos')
     .post(createAuto)
 
 router.route('/autos/:id')
-    .get(deleteAuto)
+    .delete(deleteAuto)
 
 export default router;
 

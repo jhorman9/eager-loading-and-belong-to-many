@@ -56,6 +56,12 @@ const createAuto = async(req, res) => {
 const deleteAuto = async(req, res) => {
     try {
         const { id } = req.params;
+        const auto = await Auto.findByPk(id);
+
+        if(!auto) {
+            return res.status(404).json({ message: 'Auto no encontrado' });
+        }
+
         await Auto.destroy({ where: { id } });
         res.status(200).json({ message: `Auto con ID ${id} ha sido eliminado` });
     } catch (error) {
