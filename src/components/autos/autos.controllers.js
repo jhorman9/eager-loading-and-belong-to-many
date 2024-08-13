@@ -36,7 +36,7 @@ const createAuto = async(req, res) => {
         // { name: '4', year: 1997, brandId: 1, transmission: 2 } = req.body;
         // ...auto es el rest operator
         // Saca a transmission, desctrucutando y el resto del objeto se llamará auto con el rest operator { ...auto }
-        const { transmission, ...auto } = req.body;
+        const { transmission, gamma, ...auto } = req.body;
         const newAuto = await Auto.create(auto);
         const autoTransmission = await Transmission.findOne({where: { type: transmission }});
 
@@ -47,6 +47,7 @@ const createAuto = async(req, res) => {
 
         await newAuto.addTransmission(autoTransmission); //add + nombre de modelo => addTransmission
         res.status(201).json({ message: 'Auto creado exitosamente' });
+
     } catch (error) {
         res.status(400).json({message: error});
         console.log(error);
