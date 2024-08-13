@@ -37,7 +37,12 @@ const createAuto = async(req, res) => {
         // ...auto es el rest operator
         // Saca a transmission, desctrucutando y el resto del objeto se llamará auto con el rest operator { ...auto }
         const { transmission, gamma, ...auto } = req.body;
-        const newAuto = await Auto.create(auto);
+
+        const [newAuto, created] = await Auto.findOrCreate({
+            where: auto.name, // Que busque por el nombre del auto.
+            defaults: auto // Si no lo encuentra le crea.
+        });
+
         const autoTransmission = await Transmission.findOne({where: { type: transmission }});
 
         if (!autoTransmission) {
