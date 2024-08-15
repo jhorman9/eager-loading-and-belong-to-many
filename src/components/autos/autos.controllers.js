@@ -46,7 +46,9 @@ const createAuto = async(req, res) => {
         const autoTransmission = await Transmission.findOne({where: { type: transmission }});
 
         if (!autoTransmission) {
-            await Auto.destroy( { where: { id: newAuto.id } } );
+            if(created){
+                await Auto.destroy( { where: { id: newAuto.id } } );
+            }
             return res.status(404).json({ message: 'Transmisión no encontrada' });
         }
 
@@ -57,7 +59,9 @@ const createAuto = async(req, res) => {
         console.log(autoGamma)
 
         if (!autoGamma) {
-            await Auto.destroy( { where: { id: newAuto.id } } );
+            if(created){
+                await Auto.destroy( { where: { id: newAuto.id } } );
+            }
             return res.status(404).json({ message: 'Gamma no encontrada' });
         }
         
