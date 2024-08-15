@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import db from "../utils/database.js";
 
-const Gammas = db.define('gammas', {
+const Gamma = db.define('gammas', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -15,4 +15,4 @@ const Gammas = db.define('gammas', {
     timestamps: false
 }); 
 
-export default Gammas;
+export default Gamma;

@@ -1,7 +1,7 @@
 import Auto from "../../models/autos.model.js";
 import Brand from "../../models/brands.model.js";
 import Country from "../../models/countries.model.js";
-import Gammas from "../../models/gammas.model.js";
+import Gamma from "../../models/gammas.model.js";
 import Transmission from "../../models/transmissions.model.js";
 
 const getAllAutos = async (req, res) => {
@@ -19,7 +19,7 @@ const getAllAutos = async (req, res) => {
                     attributes: ["type"], 
                 },
                 {
-                    model: Gammas,
+                    model: Gamma,
                     attributes: ["type"]
                 }
             ],
@@ -37,20 +37,32 @@ const createAuto = async(req, res) => {
         // ...auto es el rest operator
         // Saca a transmission, desctrucutando y el resto del objeto se llamará auto con el rest operator { ...auto }
         const { transmission, gamma, ...auto } = req.body;
-
+        
         const [newAuto, created] = await Auto.findOrCreate({
-            where: auto.name, // Que busque por el nombre del auto.
+            where: { name: auto.name }, // Que busque por el nombre del auto.
             defaults: auto // Si no lo encuentra le crea.
         });
 
         const autoTransmission = await Transmission.findOne({where: { type: transmission }});
 
-        if (!autoTransmission) {
-            await Auto.destroy( { where: { id: newAuto.id } } )
+        if (!autoTransmission && created) {
+            await Auto.destroy( { where: { id: newAuto.id } } );
             return res.status(404).json({ message: 'Transmisión no encontrada' });
         }
 
         await newAuto.addTransmission(autoTransmission); //add + nombre de modelo => addTransmission
+
+        const autoGamma = await Gamma.findOne({where: { type: gamma }});
+
+        console.log(autoGamma)
+
+        if (!autoGamma && created) {
+            await Auto.destroy( { where: { id: newAuto.id } } );
+            return res.status(404).json({ message: 'Gama no encontrada' });
+        }
+        
+        await newAuto.addGammas(autoGamma)
+
         res.status(201).json({ message: 'Auto creado exitosamente' });
 
     } catch (error) {
@@ -69,7 +81,7 @@ const deleteAuto = async(req, res) => {
         }
 
         await Auto.destroy({ where: { id } });
-        res.status(200).json({ message: `Auto con ID ${id} ha sido eliminado` });
+        res.status(204).json({ message: `Auto con ID ${id} ha sido eliminado` });
     } catch (error) {
         res.status(400).json(error);
     }

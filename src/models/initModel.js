@@ -2,7 +2,7 @@
 import Auto from './autos.model.js';
 import Brand from './brands.model.js';
 import Country from './countries.model.js';
-import Gammas from './gammas.model.js';
+import Gamma from './gammas.model.js';
 import Transmission from './transmissions.model.js';
 
 const initModels = () => {
@@ -25,9 +25,9 @@ const initModels = () => {
     // una transmision la puede tener muchos autos
     Transmission.belongsToMany(Auto, {through: 'AutoTransmissions'});
 
-    Gammas.belongsToMany(Auto, {through: 'AutoGammas'});
+    Gamma.belongsToMany(Auto, {through: 'AutoGamma'});
     // una transmision la puede tener muchos autos
-    Auto.belongsToMany(Gammas, {through: 'AutoGammas'});
+    Auto.belongsToMany(Gamma, {through: 'AutoGamma'});
 };
 
 export default initModels;
