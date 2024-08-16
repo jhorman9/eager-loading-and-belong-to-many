@@ -13,7 +13,9 @@ const Country = db.define('countries', {
         unique: true,
     }
 }, {
-    timestamps: false
+    timestamps: true,
+    paranoid: true,
+    deletedAt: 'destroyTime'
 });
 
 export default Country;

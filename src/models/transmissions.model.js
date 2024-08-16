@@ -7,7 +7,9 @@ const Transmission = db.define('transmissions', {
         allowNull: false
     }
 }, {
-    timestamps: false
+    timestamps: true,
+    paranoid: true,
+    deletedAt: 'destroyTime'
 });
 
 export default Transmission;

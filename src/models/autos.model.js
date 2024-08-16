@@ -16,7 +16,9 @@ const Auto = db.define('autos', {
         field: "brand_id",
     }
 }, {
-    timestamps: false
+    timestamps: true,
+    paranoid: true,
+    deletedAt: 'destroyTime'
 });
 
 export default Auto;

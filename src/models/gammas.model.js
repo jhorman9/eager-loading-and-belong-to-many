@@ -12,7 +12,9 @@ const Gamma = db.define('gammas', {
         allowNull: false
     }
 }, {
-    timestamps: false
+    timestamps: true,
+    paranoid: true,
+    deletedAt: 'destroyTime'
 }); 
 
 export default Gamma;

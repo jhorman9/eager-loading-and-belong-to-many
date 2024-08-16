@@ -12,7 +12,9 @@ const Brand = db.define('brands', {
         field: "country_id",
     }
 }, {
-    timestamps: false
+    timestamps: true,
+    paranoid: true,
+    deletedAt: 'destroyTime'
 });
 
 export default Brand;
