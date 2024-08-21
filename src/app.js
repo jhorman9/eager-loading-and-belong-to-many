@@ -8,7 +8,7 @@ initModels();
 
 db.authenticate().then(() => console.log('conexión de base de datos exitoso')).catch((error) => console.log(error));
 
-db.sync({ alter: true }).then(() => console.log('Base de datos sincronizada')).catch((error) => console.log(error));
+db.sync().then(() => console.log('Base de datos sincronizada')).catch((error) => console.log(error));
 
 const PORT = process.env.PORT ?? 8000;
 
@@ -18,7 +18,20 @@ app.use(express.json());
 app.use(autosRoutes);
 
 app.get('/', (req, res) => {
-    res.send('OK');
+    const date = new Date();
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Los meses van de 0 a 11
+    const year = date.getFullYear();
+    const formattedDate = `${day}/${month}/${year}`;
+    
+    res.json({ 
+        message: 'Bienvenido a mi servidor',
+        version: '1.0.0',
+        author: 'Jhorman Nieto P',
+        date: formattedDate,
+        description: 'API para gestionar autos en una base de datos',
+        github: 'https://github.com/jhorman9/eager-loading-and-belong-to-many'
+    });
 })
 
 app.listen(PORT, () => {
