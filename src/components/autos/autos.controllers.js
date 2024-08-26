@@ -63,7 +63,7 @@ const createAuto = async(req, res) => {
             return res.status(404).json({ message: 'Gamma no encontrada' });
         }
         
-        await newAuto.addGammas(autoGamma)
+        await newAuto.addGammas(autoGamma); //add + nombre de modelo => addGammas
 
         res.status(201).json({ message: 'Auto creado exitosamente' });
 
