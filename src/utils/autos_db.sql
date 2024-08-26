@@ -1,4 +1,4 @@
-INSERT INTO countries ("name",code, "createdAt", "updatedAt") VALUES
+INSERT INTO countries ("name","code", "createdAt", "updatedAt") VALUES
 	 ('Alemania','DE', NOW(), NOW()),
 	 ('Estados Unidos','US', NOW(), NOW()),
 	 ('Japón','JP', NOW(), NOW()),
@@ -18,13 +18,13 @@ INSERT INTO transmissions ("type", "createdAt", "updatedAt") VALUES
 	 ('MT', NOW(), NOW()),
 	 ('AT', NOW(), NOW());
 
-INSERT INTO brands ("name",country_id, "createdAt", "updatedAt") VALUES
+INSERT INTO brands ("name","country_id", "createdAt", "updatedAt") VALUES
 	 ('Volkswagen',1, NOW(), NOW()),
 	 ('Mercedez-Benz',1, NOW(), NOW()),
 	 ('Audi',1, NOW(), NOW()),
 	 ('Porsche',1, NOW(), NOW());
 
-INSERT INTO autos ("name","year",brand_id, "createdAt", "updatedAt") VALUES
+INSERT INTO autos ("name","year","brand_id", "createdAt", "updatedAt") VALUES
 	 ('A6','1994-12-1',3, NOW(), NOW()),
 	 ('A7','1994-12-1',3, NOW(), NOW()),
 	 ('A8','1994-12-3',1, NOW(), NOW()),

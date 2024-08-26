@@ -56,8 +56,6 @@ const createAuto = async(req, res) => {
 
         const autoGamma = await Gamma.findOne({where: { type: gamma }});
 
-        console.log(autoGamma)
-
         if (!autoGamma) {
             if(created){
                 await Auto.destroy( { where: { id: newAuto.id } } );
@@ -71,7 +69,6 @@ const createAuto = async(req, res) => {
 
     } catch (error) {
         res.status(400).json({message: error});
-        console.log(error);
     }
 };
 

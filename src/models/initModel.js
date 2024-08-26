@@ -1,4 +1,3 @@
-// importar todos nuestros modelos
 import Auto from './autos.model.js';
 import Brand from './brands.model.js';
 import Country from './countries.model.js';
